@@ -55,8 +55,12 @@ def find_openssl_library
 
   if $mswin
     # OpenSSL >= 1.1.0: libcrypto.lib and libssl.lib.
+    # Potentially with 'd' appended (conan center index)
     if have_library("libcrypto", "CRYPTO_malloc") &&
         have_library("libssl", "SSL_new")
+      return true
+    elsif have_library("libcryptod", "CRYPTO_malloc") &&
+        have_library("libssld", "SSL_new")
       return true
     end
 

@@ -635,7 +635,10 @@ $(CONFIG_H): $(MKFILES) $(srcdir)/win32/Makefile.sub $(win_srcdir)/Makefile.sub
 #define SIZEOF_LONG_LONG 0
 !endif
 #define SIZEOF___INT64 8
+// Avoid hitting C4117 redefined preprocessor macro
+#ifndef _INTEGRAL_MAX_BITS
 #define _INTEGRAL_MAX_BITS 64
+#endif
 !if $(LARGEFILE_SUPPORT)
 #define SIZEOF_OFF_T 8
 !else
