@@ -10,6 +10,12 @@ if ! bundle
   pkg_config("libffi") and
     ver = pkg_config("libffi", "modversion")
 
+  if $mswin
+    $defs << "-DFFI_BUILDING"
+    CONFIG['CFLAGS'] << " -DFFI_BUILDING"
+    $CFLAGS << " -DFFI_BUILDING"
+  end
+
   if have_header(ffi_header = 'ffi.h')
     true
   elsif have_header(ffi_header = 'ffi/ffi.h')

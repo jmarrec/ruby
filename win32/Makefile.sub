@@ -380,7 +380,7 @@ MINIRUBY = $(RUBY) -I$(MAKEDIR) -r$(arch)-fake
 RUNRUBY = $(MINIRUBY)
 !else
 MINIRUBY = .\miniruby$(EXEEXT) -I$(srcdir)/lib -I.
-RUNRUBY = .\$(PROGRAM) -I$(srcdir)/lib -I"$(EXTOUT)/$(arch)" -I.
+RUNRUBY = .\$(PROGRAM) --disable-gems -I$(srcdir)/lib -I"$(EXTOUT)/$(arch)" -I.
 !endif
 MINIRUBY = $(MINIRUBY) $(MINIRUBYOPT)
 RUNRUBY = $(RUNRUBY) "$(srcdir)/tool/runruby.rb" --extout="$(EXTOUT)" $(RUNRUBYOPT) -- $(RUN_OPTS)
