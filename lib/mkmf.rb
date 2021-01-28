@@ -2747,7 +2747,21 @@ MESSAGE
   ##
   # A C main function which does no work
 
-  MAIN_DOES_NOTHING = config_string('MAIN_DOES_NOTHING') || "int main(int argc, char **argv)\n{\n  return !!argv[argc];\n}"
+  MAIN_DOES_NOTHING = config_string('MAIN_DOES_NOTHING') || <<-SRC
+int main(int argc, char **argv)
+{
+  return 0;
+}
+
+int rb_hasFile(const char *t_filename) {
+  return 0;
+}
+
+int rb_require_embedded(const char *t_filename) {
+  return 0;
+}
+SRC
+
   UNIVERSAL_INTS = config_string('UNIVERSAL_INTS') {|s| Shellwords.shellwords(s)} ||
     %w[int short long long\ long]
 

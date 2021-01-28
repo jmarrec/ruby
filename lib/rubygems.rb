@@ -1392,24 +1392,24 @@ An Array (#{env.inspect}) was passed in from #{caller[3]}
 
   MARSHAL_SPEC_DIR = "quick/Marshal.#{Gem.marshal_version}/".freeze
 
-  autoload :BundlerVersionFinder, File.expand_path('rubygems/bundler_version_finder', __dir__)
-  autoload :ConfigFile,         File.expand_path('rubygems/config_file', __dir__)
-  autoload :Dependency,         File.expand_path('rubygems/dependency', __dir__)
-  autoload :DependencyList,     File.expand_path('rubygems/dependency_list', __dir__)
-  autoload :Installer,          File.expand_path('rubygems/installer', __dir__)
-  autoload :Licenses,           File.expand_path('rubygems/util/licenses', __dir__)
-  autoload :NameTuple,          File.expand_path('rubygems/name_tuple', __dir__)
-  autoload :PathSupport,        File.expand_path('rubygems/path_support', __dir__)
-  autoload :Platform,           File.expand_path('rubygems/platform', __dir__)
-  autoload :RequestSet,         File.expand_path('rubygems/request_set', __dir__)
-  autoload :Requirement,        File.expand_path('rubygems/requirement', __dir__)
-  autoload :Resolver,           File.expand_path('rubygems/resolver', __dir__)
-  autoload :Source,             File.expand_path('rubygems/source', __dir__)
-  autoload :SourceList,         File.expand_path('rubygems/source_list', __dir__)
-  autoload :SpecFetcher,        File.expand_path('rubygems/spec_fetcher', __dir__)
-  autoload :Specification,      File.expand_path('rubygems/specification', __dir__)
-  autoload :Util,               File.expand_path('rubygems/util', __dir__)
-  autoload :Version,            File.expand_path('rubygems/version', __dir__)
+  require 'rubygems/bundler_version_finder'
+  require 'rubygems/config_file'
+  require 'rubygems/dependency'
+  require 'rubygems/dependency_list'
+  require 'rubygems/resolver'
+  require 'rubygems/installer'
+  require 'rubygems/util/licenses'
+  require 'rubygems/path_support'
+  require 'rubygems/platform'
+  require 'rubygems/request_set'
+  require 'rubygems/requirement'
+  require 'rubygems/resolver'
+  require 'rubygems/source'
+  require 'rubygems/source_list'
+  require 'rubygems/spec_fetcher'
+  require 'rubygems/specification'
+  require 'rubygems/util'
+  require 'rubygems/version'
 
   require "rubygems/specification"
 end

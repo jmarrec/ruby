@@ -10,6 +10,9 @@
 #include "probes.h"
 #include "iseq.h"
 
+RUBY_EXTERN int rb_hasFile(const char *t_filename);
+RUBY_EXTERN int rb_require_embedded(const char *t_filename);
+
 static VALUE ruby_dln_librefs;
 
 #define IS_RBEXT(e) (strcmp((e), ".rb") == 0)
@@ -1116,7 +1119,11 @@ rb_require_string(VALUE fname)
 VALUE
 rb_require(const char *fname)
 {
+  if ( rb_hasFile(fname) ) {
+    return rb_require_embedded(fname);
+  } else {
     return rb_require_string(rb_str_new_cstr(fname));
+  }
 }
 
 static int
