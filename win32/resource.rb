@@ -61,7 +61,6 @@ end
 #include <winver.h>
 
 #{icon || ''}
-#{type == 'VFT_APP' ? "1 RT_MANIFEST ruby.manifest" : ""}
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION    #{nversion}
  PRODUCTVERSION #{nversion}
