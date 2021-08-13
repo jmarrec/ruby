@@ -61,7 +61,7 @@ jobs:
       - name: Configure
         run: |
           call "%VCVARS%"
-          ../src/win32/configure.bat --disable-install-doc --enable-bundled-libffi --with-opt-dir=C:/vcpkg/installed/x64-windows --with-static-linked-ext --enable-load-relative --with-openssl-dir=C:/openssl
+          ../src/win32/configure.bat --disable-install-doc --enable-bundled-libffi --with-opt-dir=C:/vcpkg/installed/x64-windows-static --with-static-linked-ext --enable-load-relative --with-openssl-dir=C:/openssl
       - name: nmake
         run: |
           call "%VCVARS%"
