@@ -60,7 +60,8 @@ jobs:
           echo on
           nmake incs
           nmake extract-extlibs
-          nmake
+          nmake /k
+          nmake /k
       - name: nmake test
         timeout-minutes: 5
         run: |
