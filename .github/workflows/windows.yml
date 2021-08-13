@@ -40,6 +40,15 @@ jobs:
           Choco-Install -PackageName openssl
           Choco-Install -PackageName winflexbison3
         shell: pwsh
+
+      - name: Clean up openssl
+        shell: bash
+        run: |
+          cp -R "/c/Program Files/OpenSSL-Win64" /c/openssl
+          cp /c/openssl/lib/libssl_static.lib /c/openssl/lib/libssl.lib
+          cp /c/openssl/lib/libcrypto_static.lib /c/openssl/lib/libcrypto.lib
+
+
       - name: git config
         run: |
           git config --global core.autocrlf false
@@ -52,7 +61,7 @@ jobs:
       - name: Configure
         run: |
           call "%VCVARS%"
-          ../src/win32/configure.bat --disable-install-doc --enable-bundled-libffi --with-opt-dir=C:/vcpkg/installed/x64-windows --with-static-linked-ext --enable-load-relative --with-openssl-dir="C:/Program Files/OpenSSL-Win64"
+          ../src/win32/configure.bat --disable-install-doc --enable-bundled-libffi --with-opt-dir=C:/vcpkg/installed/x64-windows --with-static-linked-ext --enable-load-relative --with-openssl-dir=C:/openssl
       - name: nmake
         run: |
           call "%VCVARS%"
