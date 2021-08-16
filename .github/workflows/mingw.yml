@@ -96,6 +96,16 @@ jobs:
           [Console]::InputEncoding  = [System.Text.Encoding]::GetEncoding("IBM437")
           make DESTDIR=.. install-nodoc
 
+      - name: test another code page
+        timeout-minutes: 1
+        run: |
+          echo on
+          chcp
+          .\ruby.exe -e "puts 'hello from ruby'"
+          echo "Changing code page to 720"
+          chcp 720
+          .\ruby.exe -e "puts 'hello from ruby with code page 720'"
+
       - name: test
         timeout-minutes: 5
         run: |
