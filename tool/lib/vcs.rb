@@ -545,7 +545,7 @@ class VCS
       envs = (%w'HOME XDG_CONFIG_HOME' + ENV.keys.grep(/\AGIT_/)).each_with_object({}) do |v, h|
         h[v] = ENV.delete(v)
       end
-      ENV['GIT_CONFIG_SYSTEM'] = NullDevice
+      ENV['GIT_CONFIG_SYSTEM'] = '/dev/null'
       ENV['GIT_CONFIG_GLOBAL'] = global_config
       yield
     ensure
@@ -553,7 +553,7 @@ class VCS
     end
 
     def global_config
-      return NullDevice if SAFE_DIRECTORIES.empty?
+      return '/dev/null' if SAFE_DIRECTORIES.empty?
       unless @gitconfig
         @gitconfig = Tempfile.new(%w"vcs_ .gitconfig")
         @gitconfig.close

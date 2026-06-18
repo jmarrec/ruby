@@ -114,6 +114,7 @@ class Exports::Mswin < Exports
         case filetype
         when /OBJECT/, /LIBRARY/
           l.chomp!
+          next if (/^ .*\(pick any\)$/ =~ l)...true
           next if /^[[:xdigit:]]+ 0+ UNDEF / =~ l
           next unless /External/ =~ l
           next if /(?:_local_stdio_printf_options|v(f|sn?)printf(_s)?_l)\Z/ =~ l
@@ -151,7 +152,9 @@ class Exports::Cygwin < Exports
   end
 
   def each_line(objs, &block)
-    IO.foreach("|#{self.class.nm} --extern --defined #{objs.join(' ')}", &block)
+    IO.popen("#{self.class.nm} --extern-only --defined-only #{objs.join(' ')}") do |f|
+      f.each_line(&block)
+    end
   end
 
   def each_export(objs)

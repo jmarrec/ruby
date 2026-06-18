@@ -197,8 +197,8 @@ echo ABI_VERSION = RUBY_ABI_VERSION
 #endif
 set /a MSC_VER = _MSC_VER
 #if _MSC_VER >= 1920
-set /a MSC_VER_LOWER = MSC_VER/20*20+0
-set /a MSC_VER_UPPER = MSC_VER/20*20+19
+set /a MSC_VER_LOWER = 1920
+set /a MSC_VER_UPPER = 1959
 #elif _MSC_VER >= 1900
 set /a MSC_VER_LOWER = MSC_VER/10*10+0
 set /a MSC_VER_UPPER = MSC_VER/10*10+9
@@ -227,7 +227,9 @@ RUBY_SO_NAME = $(RUBY_SO_NAME)
 
 -generic-: nul
 	@$(CPP) <<conftest.c 2>nul | findstr = >>$(MAKEFILE)
-#if defined _M_X64
+#if defined _M_ARM64
+MACHINE = arm64
+#elif defined _M_X64
 MACHINE = x64
 #else
 MACHINE = x86
@@ -241,6 +243,8 @@ MACHINE = x86
 	@echo MACHINE = alpha>>$(MAKEFILE)
 -x64-: -osname64-
 	@echo MACHINE = x64>>$(MAKEFILE)
+-arm64-: -osname64-
+	@echo MACHINE = arm64>>$(MAKEFILE)
 -ix86-: -osname32-
 	@echo MACHINE = x86>>$(MAKEFILE)
 
