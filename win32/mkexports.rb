@@ -152,7 +152,9 @@ class Exports::Cygwin < Exports
   end
 
   def each_line(objs, &block)
-    IO.foreach("|#{self.class.nm} --extern --defined #{objs.join(' ')}", &block)
+    IO.popen("#{self.class.nm} --extern-only --defined-only #{objs.join(' ')}") do |f|
+      f.each_line(&block)
+    end
   end
 
   def each_export(objs)
